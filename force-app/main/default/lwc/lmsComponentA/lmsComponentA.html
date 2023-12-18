@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-var-m-around_large">
+        <lightning-card title="LWC LMS Component A">
+            <lightning-card title={newReceivedData}>
+                {newReceivedData}
+            </lightning-card>
+            <lightning-input type="text" label="Enter message to publish" onkeyup={inputHandler}>
+
+            </lightning-input>
+            <div class="slds-var-m-around_large">
+                <lightning-button label="Publish" onclick={publishMessage}>
+
+                </lightning-button>
+            </div>
+        </lightning-card>
+    </div>
+</template>

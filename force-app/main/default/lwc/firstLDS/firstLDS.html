@@ -1,0 +1,24 @@
+<template>
+    <div class="slds-var-m-around_medium">
+        <lightning-record-view-form object-api-name="Account" record-id="0015i00000uunPjAAI">
+            <div class="slds-var-m-around_medium">
+                <lightning-output-field field-name="Name"></lightning-output-field>
+                <lightning-output-field field-name="Active__c"></lightning-output-field>
+                <lightning-output-field field-name="AccountNumber"></lightning-output-field>
+            </div>
+        </lightning-record-view-form>
+
+    </div>
+    <div class="slds-var-m-around_medium">
+        <lightning-card class="slds-var-m-around_medium">
+            <lightning-record-edit-form object-api-name="Account" record-id="0015i00000uunPjAAI">
+                <lightning-messages></lightning-messages>
+                <lightning-input-field field-name="Name"></lightning-input-field>
+                <lightning-input-field field-name="Phone"></lightning-input-field>
+                <lightning-button class="slds-var-m-around_x-small" label="cancel"></lightning-button>
+                <lightning-button class="slds-var-m-around_x-small" variant="Brand" type="submit"
+                    label="Save"></lightning-button>
+            </lightning-record-edit-form>
+        </lightning-card>
+    </div>
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <c-p2c-alert-component name="EUSNRAJU" card-title="Parent to child primitive data communication....">
+
+    </c-p2c-alert-component>
+    <div class="slds-var-m-bottom_medium"></div>
+    <c-p2c-carousel-component carousel-details={carousalData}></c-p2c-carousel-component>
+    <div class="slds-var-m-bottom_medium"></div>
+    <lightning-card variant="base">
+
+        <div class="slds-m-around_medium">
+            <lightning-input type="Number" label="Enter percentage" onkeyup={percentageHandler}></lightning-input>
+            <c-pc2-progress-component percentage={percentageValue}></c-pc2-progress-component>
+        </div>
+    </lightning-card>
+
+
+    <lightning-card variant="base">
+
+        <div class="slds-m-around_medium">
+            <lightning-button variant="base" label="Call child method from parent " title="Looks like a link"
+                onclick={resetSlider} class="slds-m-left_x-small">
+
+            </lightning-button> <c-p2c-slider-component></c-p2c-slider-component>
+        </div>
+    </lightning-card>
+</template>

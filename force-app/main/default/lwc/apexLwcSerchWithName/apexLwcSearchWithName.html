@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Accounts with search">
+            <lightning-input onchange={onSearchHandler} label="Enter name of account" value={searchKey}></lightning-input>
+            <template if:true={accountList}>
+                <template for:each={accountList} for:item=account>
+                    <div class="slds-box" key={account.Id}>
+                        <p> <strong>Name : </strong>{account.Name}</p>
+                    </div>
+                </template>
+            </template>
+    </lightning-card>
+</template>

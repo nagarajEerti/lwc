@@ -1,0 +1,22 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+        <lightning-combobox name="progress" label="INDUSTRY" value={value} placeholder="Select Progress"
+            options={pickListValues} onchange={handleChange}></lightning-combobox>
+
+        <p>Selected value is: {value}</p>
+    </lightning-card>
+    <div class="slds-var-m-around_medium"></div>
+    <lightning-card icon-name="standard:account" variant="base">
+        <lightning-combobox name="progress" label="TYPE" value={selectedType} placeholder="Select Progress"
+            options={typeOptions} onchange={typeHandleChange}></lightning-combobox>
+
+        <p>Selected value is: {value}</p>
+    </lightning-card>
+    <div class="slds-var-m-around_medium"></div>
+    <lightning-card icon-name="standard:account" variant="base">
+        <lightning-combobox name="progress" label="TYPE" value={selectedRating} placeholder="Select Progress"
+            options={ratingOptions} onchange={ratingHandleChange}></lightning-combobox>
+
+        <p>Selected value is: {value}</p>
+    </lightning-card>
+</template>

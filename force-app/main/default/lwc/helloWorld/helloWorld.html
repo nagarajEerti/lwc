@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Greeting card">
+        <div class="slds-var-m-around_medium">
+            <template if:true={isEven}>
+                <div>Even</div>
+                <div>{number}</div>
+            </template>
+            <template if:false={isEven}>
+                <div>odd</div>
+                <div>{number}</div>
+            </template>
+        </div>
+        <div class="slds-var-m-around_medium">
+            <lightning-button variant="brand" label="Brand" title="Primary action" onclick={handleClick}
+                class="slds-m-left_x-small"></lightning-button>
+
+        </div>
+    </lightning-card>
+    <lightning-card title="Greeting card" class="slds-var-m-around_medium">
+        <lightning-input 
+          type="text"
+          label="Enter some text"
+          onkeyup={onChangeHandler}
+        ></lightning-input>
+        <div>
+           {name}
+        </div>
+    </lightning-card>
+    <lightning-card title="student list">
+        <div class="slds-var-m-around_medium">
+            <template for:each={students} for:item="student" for:index="index">
+                <ul key={student.id} class="slds-has-dividers_around-space">
+                   <li class="slds-item"> {student.name}</li>
+
+                   </ul>
+            </template>
+        </div>
+    </lightning-card>
+</template>

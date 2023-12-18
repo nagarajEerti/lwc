@@ -1,0 +1,11 @@
+<template>
+    <h1>{msg}</h1>
+    <div class="slds-var-m-around_medium" onclose={closeHandler}>
+        <lightning-button variant="brand" label="Show model" onclick={showHandler}
+            class="slds-m-left_x-small"></lightning-button>
+
+        <template if:true={showModel}>
+            <c-c2p-model-component></c-c2p-model-component>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Account List With Filter">
+        <div class="slds-box">
+            <lightning-combobox label="Choose Type" options={accountTypes} onchange={onTypeHandle} value={accountType}>
+
+            </lightning-combobox>
+        </div>
+        <template if:true={accountListWithFilter}>
+            <template for:each={accountListWithFilter.data} for:item="account">
+                <div class="slds-box" key={account.Id}>
+                    <p> <strong>Name : </strong>{account.Name}</p>
+                    <p> <strong>Type : </strong>{account.Type}</p>
+                    <p> <strong>Industry : </strong>{account.Industry}</p>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

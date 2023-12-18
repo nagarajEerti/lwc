@@ -1,0 +1,21 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+        <div class="slds-p-around_medium">
+            <form class="createFrom">
+
+                <lightning-input name="FirstName" label="FirstName" onchange={changeHandler}
+                    class="slds-m-bottom_x-small"></lightning-input>
+                <lightning-input name="LastName" label="LastName" onchange={changeHandler}
+                    class="slds-m-bottom_x-small"></lightning-input>
+                <lightning-input name="Title" label="Title" onchange={changeHandler}
+                    class="slds-m-bottom_x-small"></lightning-input>
+                <lightning-input name="Phone" label="Phone" type="tel" onchange={changeHandler}
+                    class="slds-m-bottom_x-small"></lightning-input>
+                <lightning-input name="Email" label="email" type="email" onchange={changeHandler}
+                    class="slds-m-bottom_x-small"></lightning-input>
+
+                <lightning-button variant="base" label="CreateContact" onclick={createContact}></lightning-button>
+            </form>
+        </div>
+    </lightning-card>
+</template>

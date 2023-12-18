@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <template if:true={objectInfo}>
+            <div>
+                ObjectInfo ={objectInfo}
+            </div>
+        </template>
+    </lightning-card>
+    <lightning-card>
+        <template if:true={objectInfos}>
+            <template for:each={objectInfos.results} for:item="obj">
+                <div key={obj.apiName}>
+                    <div>
+                        API NAME- {obj.result.apiName}
+                    </div>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>
