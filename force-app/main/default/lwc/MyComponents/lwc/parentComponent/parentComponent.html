@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Parent component">
+        <lightning-button label="New" slot="actions"></lightning-button>
+        <p class="slds-p-horizontal_small">Card Body (custom component)</p>
+        <div class="slds-p-around_medium lgc-bg" >
+            <lightning-input type="text" label="Enter Name Here" onchange={nameHandler}></lightning-input>
+            <div>{msg}</div>
+            <lightning-button label="Effected by Child" slot="actions"></lightning-button>
+        </div>
+        <p slot="footer" onhit={onHitHandler}>Card Footer
+
+            <c-child-component name={name}></c-child-component>
+        </p>
+    </lightning-card>
+</template>
