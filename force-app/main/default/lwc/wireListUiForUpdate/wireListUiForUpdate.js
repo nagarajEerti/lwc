@@ -2,12 +2,25 @@ import { LightningElement, wire } from 'lwc';
 import CONTACT_OBJECT from '@salesforce/schema/Contact'
 import { getListUi } from 'lightning/uiListApi';
 import { updateRecord } from 'lightning/uiRecordApi';
-const COLS = [
+const COLS = [ 
     { label: "Id", fieldName: "Id" },
     { label: "Name", fieldName: "Name" },
     { label: "Title", fieldName: "Title" },
     { label: "Phone", fieldName: "Phone", editable: true },
-    { label: "Email", fieldName: "Email", type: "email", editable: true }
+    { label: "Email", fieldName: "Email", type: "email", editable: true },
+    {
+        label: 'Action',
+        type: 'button',
+        initialWidth: 135,
+        typeAttributes: {
+            label: 'Click Me',
+            title: 'Click to perform an action',
+            name: 'actionButton',
+            value: 'clickAction',
+            variant: 'brand',
+            
+        }
+    }
 ]
 export default class WireListUiForUpdate extends LightningElement {
     contacts = [];
@@ -19,7 +32,8 @@ export default class WireListUiForUpdate extends LightningElement {
             console.error(error);
         }
         if (data) {
-            console.log(data);
+            console.log(data,"hii");
+            console.log("naaaaaaani")
             this.contacts = data.records.records.map((item) => {
                 return {
                     "Id": this.getValue(item, "Id"),
@@ -32,7 +46,9 @@ export default class WireListUiForUpdate extends LightningElement {
             console.log(this.contacts, "for data table")
         }
     }
-
+    handleButtonClick(){
+        console.log("MDL")
+    }
     getValue(data, field) {
         return data.fields[field].value
     }
