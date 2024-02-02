@@ -61,5 +61,27 @@ public  class ContactTriggerHandler {
           }
         AccountContactServices.updateActiveContacts(accIds);
     }
+    public static void sendEmailToSystemAdmin(List<Contact> cons){
+      try {
+        System.debug('Send email to the admin');
+          List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+          User sysAdmin = [SELECT Id,Profile.Name,Email FROM USER WHERE Profile.Name ='System Administrator'];
+          System.debug(sysAdmin);
+        for(Contact c : cons){
+          if(sysAdmin.Email != null){
+            Messaging.SingleEmailMessage  email= new Messaging.SingleEmailMessage();
+          email.setSubject('Sending FROM SYS ADMIN');
+          email.setHtmlBody('<b> HI HERE IS MY EMAIL BODY AFTER CREATING CONTACT</b>');
+          email.toaddresses = new String[] {sysAdmin.Email};
+          mails.add(email);
+          }
+        }
+         Messaging.SendEmailResult[] result = Messaging.sendEmail(mails);
+         System.debug(result);
+        
+      } catch (Exception e) {
+        System.debug(e.getCause());
+      }
+    }
     
 }

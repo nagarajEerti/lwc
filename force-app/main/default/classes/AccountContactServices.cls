@@ -7,7 +7,7 @@ public class AccountContactServices {
                                           WHERE AccountId IN:accIds AND Active__C = true 
                                           GROUP BY AccountId];
        Map<Id,Account> accountsToUpdate = new Map<Id,Account>();
-             for(AggregateResult result:results){
+             for(AggregateResult result: results){
               String accId = String.valueOf(result.get('AccountId'));
               Integer totalContacts = Integer.valueOf(result.get('totalContacts'));
               Account acc = new Account(Id=accId,Active_Contact__c = totalContacts);
