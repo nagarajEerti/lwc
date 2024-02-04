@@ -2,6 +2,8 @@ import { LightningElement, wire } from 'lwc';
 import CONTACT_OBJECT from '@salesforce/schema/Contact'
 import { getListUi } from 'lightning/uiListApi';
 import { updateRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+
 const COLS = [ 
     { label: "Id", fieldName: "Id" },
     { label: "Name", fieldName: "Name" },
@@ -46,8 +48,31 @@ export default class WireListUiForUpdate extends LightningElement {
             console.log(this.contacts, "for data table")
         }
     }
-    handleButtonClick(){
-        console.log("MDL")
+    handleButtonClick(row){
+        // console.log(row.Name,row.Phone,row.Title,row.Email,"MDL")
+        const updatedRow = { Id: row.Id, Phone: "108" };
+
+        // Use LDS to update the record
+        updateRecord({ fields: updatedRow })
+            .then((result) => {
+                // Update the local data array to reflect the change
+                this.contacts = this.contacts.map(item => (item.Id === row.Id ? { ...item, ...updatedRow } : item));
+                this.showToast('Success!!', `contact  'Phone' updated with is ${result.fields.Phone.value}`)
+
+                console.log('Record updated successfully',result.fields.Phone.value);
+            })
+            .catch(error => {
+                console.error('Error updating record', error);
+            });
+    }
+    handleRowAction(event) {
+        const action = event.detail.action;
+        const row = event.detail.row;
+
+        if (action.name === 'actionButton') {
+            // Handle button click action
+            this.handleButtonClick(row);
+        }
     }
     getValue(data, field) {
         return data.fields[field].value
@@ -60,6 +85,7 @@ export default class WireListUiForUpdate extends LightningElement {
         })
 
         const promises = recordInputs.map(recordInput => updateRecord(recordInput));
+        console.log(promises,88)
         Promise.all(promises)
             .then(() => {
                 console.log("contacts updated ")
@@ -68,5 +94,12 @@ export default class WireListUiForUpdate extends LightningElement {
             .catch((err) => {
                 console.error(err, "data table error")
             })
+    }
+    showToast(title, message, variant){
+        this.dispatchEvent(new ShowToastEvent({
+            title,
+            message,
+            variant:variant || 'success'
+        }))
     }
 }

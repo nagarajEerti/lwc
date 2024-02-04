@@ -2,11 +2,9 @@
 <template>
     <lightning-card>
         <div style="height: 300px;">
-            <lightning-datatable key-field="Id" data={contacts} 
-            hide-checkbox-column 
-            draft-values={draftValues}
-            onsave={handleSave}
-            columns={columns}>
+            <lightning-datatable key-field="Id" data={contacts} hide-checkbox-column draft-values={draftValues}
+                onsave={handleSave} columns={columns} onrowaction={handleRowAction}>
+
             </lightning-datatable>
         </div>
     </lightning-card>

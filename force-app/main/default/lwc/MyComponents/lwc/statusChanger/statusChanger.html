@@ -8,10 +8,10 @@
 
         </div>
 
-        <!-- <div style="height: 300px;">
-            <lightning-datatable key-field="Id" data={contacts} hide-checkbox-column draft-values={draftValues}
-                onsave={handleSave} columns={columns}>
+        <div style="height: 300px;">
+            <lightning-datatable key-field="Id" data={allEmployees} hide-checkbox-column draft-values={draftValues}
+                onsave={handleSave} columns={columns} onrowaction={handleRowAction}>
             </lightning-datatable>
-        </div> -->
+        </div>
     </lightning-card>
 </template>
