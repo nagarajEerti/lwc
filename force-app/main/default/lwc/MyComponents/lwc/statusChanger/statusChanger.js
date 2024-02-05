@@ -1,7 +1,8 @@
 import { LightningElement, wire } from 'lwc';
 import BOOK_OBJECT from '@salesforce/schema/Book__c'
 import { getListUi } from 'lightning/uiListApi';
-import { updateRecord } from 'lightning/uiRecordApi';
+import { refreshApex } from '@salesforce/apex';
+import { createRecord, updateRecord } from 'lightning/uiRecordApi';
 const COLS =[
     { label: "Id", fieldName: "Id" },
     { label: "Name", fieldName: "Name",editable: true },
@@ -28,8 +29,14 @@ export default class StatusChanger extends LightningElement {
     error=''
     columns = COLS;
     draftValues = [];
+    newBook = false;
+    formFields = {};
+
+    connectedCallback(){
+        this.loadData();
+    }
     @wire(getListUi, { objectApiName: BOOK_OBJECT.objectApiName,listViewApiName:"All" })
-    allEmployees({ error, data }) {
+    getAllEmployees({ error, data }) {
         if (error) { 
             console.log(error)
         }
@@ -46,8 +53,27 @@ export default class StatusChanger extends LightningElement {
             })            
         }
     }
-
-
+    newBookhandler(){
+        this.newBook = !this.newBook
+    }
+    bookInputHandler(event){
+        let {name,value,} = event.target;
+        this.formFields[name] = value;
+        name == 'isReaded__c' ? this.formFields[name] = event.target.checked:null;
+    }
+    createNewBook(){
+        createRecord({apiName: BOOK_OBJECT.objectApiName,fields:this.formFields})
+        .then((result)=>{
+           this.loadData();
+            this.allEmployees.push(result.fields)
+            console.log("new Book created",result)
+            this.formFields = {};
+            this.template.querySelector('form.createBook').reset()
+        })
+        .catch((err)=>{
+            console.log("new Book err",err)
+        })
+    }
     getValue(data, field) {
         return data.fields[field].value
     }
@@ -91,6 +117,9 @@ export default class StatusChanger extends LightningElement {
             })
     
     }
-    
+    loadData() {
+        // Refresh the wired data
+        return refreshApex(this.getAllEmployees);
+    }
 
 }
