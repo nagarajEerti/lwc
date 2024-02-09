@@ -38,24 +38,23 @@ const COLS = [
 ]
 export default class StatusChanger extends LightningElement {
 
-    @track allEmployees = [];
+    allEmployees = [];
     error = ''
     columns = COLS;
     draftValues = [];
     newBook = false;
     formFields = {};
-
-    // connectedCallback(){
-    //     this.loadData();
-    // }
+    employeeData;
+    
     @wire(getListUi, { objectApiName: BOOK_OBJECT.objectApiName, listViewApiName: "All" })
-    getAllEmployees({ error, data }) {
-        if (error) {
+    fetchAllEmployees(result) {
+        this.employeeData = result
+        if (result.error) {
             console.log(error)
         }
-        if (data) {
-            console.log(data, "new emps data")
-            this.allEmployees = data.records.records.map(emp => {
+        if (result.data) {
+            console.log(result.data, "new emps data")
+            this.allEmployees = result.data.records.records.map(emp => {
                 return {
                     "Name": this.getValue(emp, "Name"),
                     "Id": this.getValue(emp, "Id"),
@@ -64,8 +63,27 @@ export default class StatusChanger extends LightningElement {
                     "ButtonColor": this.getValue(emp, "isReaded__c") ? "destructive" : "brand",
                 }
             })
+
         }
     }
+    // getAllEmployees({ error, data }) {
+    //     if (error) {
+    //         console.log(error)
+    //     }
+    //     if (data) {
+    //         console.log(data, "new emps data")
+    //         this.allEmployees = data.records.records.map(emp => {
+    //             return {
+    //                 "Name": this.getValue(emp, "Name"),
+    //                 "Id": this.getValue(emp, "Id"),
+    //                 "isReaded__c": this.getValue(emp, "isReaded__c"),
+    //                 "ButtonLabel": this.getValue(emp, "isReaded__c") ? "Unread" : "Readed",
+    //                 "ButtonColor": this.getValue(emp, "isReaded__c") ? "destructive" : "brand",
+    //             }
+    //         })
+    //     }
+    // }
+
     newBookHandler() {
         this.newBook = !this.newBook
     }
@@ -79,6 +97,8 @@ export default class StatusChanger extends LightningElement {
             .then((result) => {
                 this.formFields = {};
                 this.template.querySelector('form.createBook').reset();
+                this.loadData();
+                this.newBook = !this.newBook
             })
             .catch((err) => {
                 console.log("new Book err",)
@@ -141,7 +161,7 @@ export default class StatusChanger extends LightningElement {
     }
     loadData() {
         console.log("Refresh the wired data");
-        return refreshApex(this.allEmployees);
+        return refreshApex(this.employeeData);
     }
 
 }

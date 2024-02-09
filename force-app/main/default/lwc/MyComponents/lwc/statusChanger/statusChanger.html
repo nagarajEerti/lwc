@@ -6,9 +6,9 @@
                 <form class="createBook">
                     <lightning-input label="Book Name" name="Name" onchange={bookInputHandler}
                         class="slds-m-bottom_x-small"></lightning-input>
-                    <lightning-input label="Book Name" name="isReaded__c" type="checkbox" onchange={bookInputHandler}
+                    <lightning-input label="isRead?" name="isReaded__c" type="checkbox" onchange={bookInputHandler}
                         class="slds-m-bottom_x-small"></lightning-input>
-                    <lightning-button variant="destructive" label="Cancle" onclick={newBookhandler}
+                    <lightning-button variant="destructive" label="Cancle" onclick={newBookHandler}
                         class="slds-m-left_x-small"></lightning-button>
                     <lightning-button variant="brand" label="Create" onclick={createNewBook}
                         class="slds-m-left_x-small"></lightning-button>
