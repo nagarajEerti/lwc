@@ -45,12 +45,12 @@ export default class StatusChanger extends LightningElement {
     newBook = false;
     formFields = {};
     employeeData;
-    
+
     @wire(getListUi, { objectApiName: BOOK_OBJECT.objectApiName, listViewApiName: "All" })
     fetchAllEmployees(result) {
         this.employeeData = result
         if (result.error) {
-            console.log(error)
+            console.log(result.error)
         }
         if (result.data) {
             console.log(result.data, "new emps data")
@@ -101,7 +101,7 @@ export default class StatusChanger extends LightningElement {
                 this.newBook = !this.newBook
             })
             .catch((err) => {
-                console.log("new Book err",)
+                console.log("new Book err", err)
             })
     }
     getValue(data, field) {
